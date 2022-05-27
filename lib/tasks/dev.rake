@@ -37,32 +37,33 @@ task :sample_data do
   end
 
   users = User.all
+  teams = ["red", "orange", "yellow", "green", "blue", "purple", "pink", "brown"]
 
   users.each do |user|
     rand(1..4).times {
+      pieceroll = rand(1..15)
+      piecetyperoll = ""
+      pointsroll = 0
+      if pieceroll < 9 
+        piecetyperoll = "pawn"
+        pointsroll = 1
+      elsif pieceroll < 11
+        piecetyperoll = "knight"
+        pointsroll = 3
+      elsif pieceroll < 13
+        piecetyperoll = "bishop"
+        pointsroll = 3
+      elsif pieceroll < 15
+        piecetyperoll = "rook"
+        pointsroll = 5
+      else
+        piecetyperoll = "queen"
+        pointsroll = 9
+      end
       Piece.create(
-        owner_id: user.id
-        teamcolor: ["red", "orange", "yellow", "green", "blue", "purple", "pink", "brown"].sample
-        pieceroll = rand(1..15)
-        piecetyperoll = ""
-        pointsroll = 0
-        if pieceroll < 9 
-          piecetyperoll = "pawn"
-          pointsroll = 1
-        elsif pieceroll < 11
-          piecetyperoll = "knight"
-          pointsroll = 3
-        elsif pieceroll < 13
-          piecetyperoll = "bishop"
-          pointsroll = 3
-        elsif pieceroll < 15
-          piecetyperoll = "rook"
-          pointsroll = 5
-        else
-          piecetyperoll = "queen"
-          pointsroll = 9
-        end
-        piecetype: piecetyperoll
+        owner_id: user.id,
+        teamcolor: teams.sample,
+        piecetype: piecetyperoll,
         points: pointsroll
       )
     }
@@ -81,10 +82,10 @@ task :sample_data do
 
 
 # set up the games. This will look similar to the actual initialization of the games.
-  Game.create(whiteteamcolor: "red" blackteamcolor: "blue" boardposition: "a2a4b7b5" movehistory: "" turn: 3)
-  Game.create(whiteteamcolor: "yellow" blackteamcolor: "brown" boardposition: "" movehistory: "" turn: 1)
-  Game.create(whiteteamcolor: "green" blackteamcolor: "orange" boardposition: "e2e4e7e5d2d4e5d4" movehistory: "" turn: 5)
-  Game.create(whiteteamcolor: "pink" blackteamcolor: "purple" boardposition: "d2d4" movehistory: "" turn: 1)
+  Game.create(whiteteamcolor: "red", blackteamcolor: "blue", boardposition: "asdfjk12", movehistory: "a2a4b7b5", turn: 3)
+  Game.create(whiteteamcolor: "yellow", blackteamcolor: "brown", boardposition: "asdfjk12", movehistory: "", turn: 1)
+  Game.create(whiteteamcolor: "green", blackteamcolor: "orange", boardposition: "asdfjk12", movehistory: "e2e4e7e5d2d4e5d4", turn: 5)
+  Game.create(whiteteamcolor: "pink", blackteamcolor: "purple", boardposition: "asdfjk12", movehistory: "d2d4", turn: 1)
 
 
   # We're not going to make moves here. That'll happen when someone logs in. I'll check with the API to see if it's legal,
@@ -97,9 +98,20 @@ task :sample_data do
 
   # Vote.create() will also follow that same pattern, because the move needs to be created before we can vote on it.
 
-  games = Game.all
+  Comment.create(commentor: 11, game: 1, commentroom: "general", commenttext: Faker::Quote.jack_handey )
+  Comment.create(commentor: 11, game: 1, commentroom: "blue", commenttext: Faker::Quote.jack_handey )
+  Comment.create(commentor: 11, game: 1, commentroom: "red", commenttext: Faker::Quote.jack_handey )
+  Comment.create(commentor: 12, game: 1, commentroom: "general", commenttext: Faker::Quote.jack_handey )
+  Comment.create(commentor: 12, game: 1, commentroom: "blue", commenttext: Faker::Quote.jack_handey )
+  Comment.create(commentor: 13, game: 1, commentroom: "general", commenttext: Faker::Quote.jack_handey )
+  Comment.create(commentor: 13, game: 1, commentroom: "blue", commenttext: Faker::Quote.jack_handey )
+  Comment.create(commentor: 13, game: 1, commentroom: "purple", commenttext: Faker::Quote.jack_handey ) 
+  Comment.create(commentor: 11, game: 1, commentroom: "red", commenttext: Faker::Quote.jack_handey )
+  Comment.create(commentor: 11, game: 1, commentroom: "blue", commenttext: Faker::Quote.jack_handey )
+  Comment.create(commentor: 11, game: 1, commentroom: "general", commenttext: Faker::Quote.jack_handey )
 
-  # CREATE COMMENTS
+  # I'm going to allow users to comment to their own team about a different game. So the tabs will show up there as well.
+
 
   ending = Time.now
   p "It took #{(ending - starting).to_i} seconds to create sample data."
