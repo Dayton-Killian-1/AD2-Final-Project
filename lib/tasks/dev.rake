@@ -53,7 +53,7 @@ task :sample_data do
           piecetyperoll = "knight"
           pointsroll = 3
         elsif pieceroll < 13
-          piecetyperoll = "bisop"
+          piecetyperoll = "bishop"
           pointsroll = 3
         elsif pieceroll < 15
           piecetyperoll = "rook"
@@ -69,22 +69,37 @@ task :sample_data do
     
   end
 
-  Game.create(whiteteamcolor: red blackteamcolor: blue boardposition: "asdf1234" movehistory: "" turn: 1)
-  Game.create(whiteteamcolor: yellow blackteamcolor: brown boardposition: "asdf1234" movehistory: "" turn: 1)
-  Game.create(whiteteamcolor: green blackteamcolor: orange boardposition: "asdf1234" movehistory: "" turn: 1)
-  Game.create(whiteteamcolor: pink blackteamcolor: purple boardposition: "asdf1234" movehistory: "" turn: 1)
+  # alice has a blue knight and red pawn
+  # bob has a blue pawn and yellow queen
+  # carol has a blue rook and purple bishop
+  Piece.create(owner_id: 11, teamcolor: "blue", piecetype: "knight", points: 3)
+  Piece.create(owner_id: 11, teamcolor: "red", piecetype: "pawn", points: 1)
+  Piece.create(owner_id: 12, teamcolor: "blue", piecetype: "pawn", points: 1)
+  Piece.create(owner_id: 12, teamcolor: "yellow", piecetype: "queen", points: 9)
+  Piece.create(owner_id: 13, teamcolor: "blue", piecetype: "rook", points: 5)
+  Piece.create(owner_id: 13, teamcolor: "purple", piecetype: "bishop", points: 3)
+
+
+# set up the games. This will look similar to the actual initialization of the games.
+  Game.create(whiteteamcolor: "red" blackteamcolor: "blue" boardposition: "a2a4b7b5" movehistory: "" turn: 3)
+  Game.create(whiteteamcolor: "yellow" blackteamcolor: "brown" boardposition: "" movehistory: "" turn: 1)
+  Game.create(whiteteamcolor: "green" blackteamcolor: "orange" boardposition: "e2e4e7e5d2d4e5d4" movehistory: "" turn: 5)
+  Game.create(whiteteamcolor: "pink" blackteamcolor: "purple" boardposition: "d2d4" movehistory: "" turn: 1)
+
+
+  # We're not going to make moves here. That'll happen when someone logs in. I'll check with the API to see if it's legal,
+  # and if it is, it'll call Move.create. 
+
+  # Moves can all be referenced as the square they were going from and the square they're going to. So d2d4 is how you'd 
+  # note 1. d4, and d2d4e2e4d4de4 is how you'd show 1. d4 e4 2. dxe4.
+  # https://chess-api.herokuapp.com/
+  # https://chess-api.herokuapp.com/next_best/d2d4g8f6
+
+  # Vote.create() will also follow that same pattern, because the move needs to be created before we can vote on it.
 
   games = Game.all
 
-  games.each do |game|
-# CREATE MOVES
-
-  end
-
-
-# CREATE VOTES
-
-# CREATE COMMENTS
+  # CREATE COMMENTS
 
   ending = Time.now
   p "It took #{(ending - starting).to_i} seconds to create sample data."
