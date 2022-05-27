@@ -118,6 +118,8 @@ GEM
       warden (~> 1.2.3)
     diffy (3.4.0)
     erubi (1.10.0)
+    faker (2.21.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     git (1.10.2)
       rchardet (~> 1.8)
@@ -326,6 +328,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  faker
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)
