@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :comments
   resources :votes
   resources :moves
   resources :games

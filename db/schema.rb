@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_27_173557) do
+ActiveRecord::Schema.define(version: 2022_05_27_174319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "commentor_id", null: false
+    t.string "commentroom", default: "general"
+    t.bigint "game_id", null: false
+    t.text "commenttext"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentor_id"], name: "index_comments_on_commentor_id"
+    t.index ["game_id"], name: "index_comments_on_game_id"
+  end
 
   create_table "games", force: :cascade do |t|
     t.string "whiteteamcolor"
@@ -74,6 +85,8 @@ ActiveRecord::Schema.define(version: 2022_05_27_173557) do
     t.index ["voter_id"], name: "index_votes_on_voter_id"
   end
 
+  add_foreign_key "comments", "games"
+  add_foreign_key "comments", "users", column: "commentor_id"
   add_foreign_key "moves", "games"
   add_foreign_key "pieces", "users", column: "owner_id_id"
   add_foreign_key "votes", "moves"

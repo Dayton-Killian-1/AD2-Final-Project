@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many  :pieces, foreign_key: "owner_id", dependent: :destroy
   has_many  :votes, foreign_key: "voter", dependent: :destroy
+  has_many  :votes, foreign_key: "commentor", dependent: :destroy
 end
