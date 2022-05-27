@@ -4,4 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many  :pieces, foreign_key: "owner_id", dependent: :destroy
+  has_many  :votes, foreign_key: "voter", dependent: :destroy
 end

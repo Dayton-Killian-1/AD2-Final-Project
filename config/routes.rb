@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :votes
   resources :moves
   resources :games
   resources :pieces
