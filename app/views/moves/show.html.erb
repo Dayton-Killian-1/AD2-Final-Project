@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @move.game_id %>
+</p>
+
+<p>
+  <strong>Accepted:</strong>
+  <%= @move.accepted %>
+</p>
+
+<p>
+  <strong>Currentsetup:</strong>
+  <%= @move.currentsetup %>
+</p>
+
+<p>
+  <strong>Setupifaccepted:</strong>
+  <%= @move.setupifaccepted %>
+</p>
+
+<p>
+  <strong>Decidingteam:</strong>
+  <%= @move.decidingteam %>
+</p>
+
+<%= link_to 'Edit', edit_move_path(@move) %> |
+<%= link_to 'Back', moves_path %>

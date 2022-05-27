@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game: one
+  accepted: false
+  currentsetup: MyString
+  setupifaccepted: MyString
+  decidingteam: MyString
+
+two:
+  game: two
+  accepted: false
+  currentsetup: MyString
+  setupifaccepted: MyString
+  decidingteam: MyString
