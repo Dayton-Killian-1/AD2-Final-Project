@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  whiteteamcolor: MyString
+  blackteamcolor: MyString
+  boardposition: MyString
+  winner: MyString
+  movehistory: MyString
+  turn: MyString
+
+two:
+  whiteteamcolor: MyString
+  blackteamcolor: MyString
+  boardposition: MyString
+  winner: MyString
+  movehistory: MyString
+  turn: MyString

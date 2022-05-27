@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_27_164953) do
+ActiveRecord::Schema.define(version: 2022_05_27_170137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "games", force: :cascade do |t|
+    t.string "whiteteamcolor"
+    t.string "blackteamcolor"
+    t.string "boardposition"
+    t.string "winner"
+    t.string "movehistory"
+    t.string "turn", default: "white"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "pieces", force: :cascade do |t|
     t.bigint "owner_id_id", null: false
