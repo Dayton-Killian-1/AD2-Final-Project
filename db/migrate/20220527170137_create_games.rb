@@ -4,6 +4,7 @@ class CreateGames < ActiveRecord::Migration[6.1]
       t.string :whiteteamcolor
       t.string :blackteamcolor
       t.string :boardposition
+      t.boolean :gamestatus, default: "playing"
       t.string :winner
       t.string :movehistory
       t.string :turn, default: "white"
